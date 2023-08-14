@@ -86,13 +86,10 @@ function App() {
 	//
 	useEffect(
 		function () {
-			const controller = new AbortController()
 			async function fetchMovie() {
 				try {
 					setIsLoading(true)
-					const res = await fetch(`http://www.omdbapi.com/?apikey=${key}&s=${query}`, {
-						signal: controller.signal,
-					})
+					const res = await fetch(`http://www.omdbapi.com/?apikey=${key}&s=${query}`)
 					if (!res.ok) {
 						throw new error('Something is wrong with fetching movie')
 					}
@@ -108,9 +105,6 @@ function App() {
 				}
 			}
 			fetchMovie()
-			return function () {
-				controller.abort()
-			}
 		},
 		[query]
 	)

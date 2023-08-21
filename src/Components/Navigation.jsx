@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const Navigation = ({ children }) => {
 	return <nav className="nav-bar">{children}</nav>
@@ -13,6 +13,10 @@ export const Logo = function () {
 	)
 }
 export const SearchBar = function ({ query, setQuery }) {
+	const searchEl = useRef(null)
+	useEffect(function () {
+		searchEl.current.focus()
+	}, [])
 	return (
 		<input
 			className="search"
@@ -20,6 +24,7 @@ export const SearchBar = function ({ query, setQuery }) {
 			placeholder="Search movies..."
 			value={query}
 			onChange={e => setQuery(e.target.value)}
+			ref={searchEl}
 		/>
 	)
 }

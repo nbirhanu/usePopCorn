@@ -63,12 +63,16 @@ const key = 'dde335f4'
 function App() {
 	const [query, setQuery] = useState('')
 	const [movies, setMovies] = useState([])
-	const [watched, setWatched] = useState([])
 	const [isOpen1, setIsOpen1] = useState(true)
 	const [isOpen2, setIsOpen2] = useState(true)
 	const [isLoding, setIsLoading] = useState(false)
 	const [error, setError] = useState('')
 	const [selectedId, setSelectedId] = useState(null)
+	// const [watched, setWatched] = useState([])
+	const [watched, setWatched] = useState(function () {
+		const localStorageValue = localStorage.getItem('watched')
+		return JSON.parse(localStorageValue)
+	})
 
 	//
 	const handleSelectedIdMovie = function (id) {
@@ -83,7 +87,15 @@ function App() {
 	const handleRemoveWatchedMovie = function (id) {
 		setWatched(watched => watched.filter(movie => movie.imdbID !== id))
 	}
+	// useEfffect for persisting watched movie on the app
+	useEffect(
+		function () {
+			localStorage.setItem('watched', JSON.stringify(watched))
+		},
+		[watched]
+	)
 	//
+
 	useEffect(
 		function () {
 			async function fetchMovie() {

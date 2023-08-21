@@ -75,6 +75,7 @@ function App() {
 	})
 
 	//
+	//
 	const handleSelectedIdMovie = function (id) {
 		setSelectedId(selectedId => (selectedId === id ? null : id))
 	}

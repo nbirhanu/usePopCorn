@@ -17,6 +17,10 @@ const MovieDetails = ({ selectedId, handleCloseMovieDetails, addWatchedMovie, wa
 		Director: director,
 		Genre: genre,
 	} = movieD
+	//
+	const [isTop, setIsTop] = useState(imdbRating > 8)
+	console.log(isTop)
+	//
 	const addMovie = function () {
 		const newMovie = {
 			imdbID: selectedId,
@@ -75,10 +79,10 @@ const MovieDetails = ({ selectedId, handleCloseMovieDetails, addWatchedMovie, wa
 								{released} &bull; {runtime}
 							</p>
 							<p>{genre}</p>
-							{/* <p>
-						<span>⭐️</span>
-						{imdbRating} IMDb rating
-					</p> */}
+							<p>
+								<span>⭐️</span>
+								{imdbRating} IMDb rating
+							</p>
 						</div>
 					</header>
 					<section>
